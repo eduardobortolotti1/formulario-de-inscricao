@@ -1,7 +1,7 @@
 async function getCidades() {
-  // Fetch na rota /getCidades e retorna um object array das cidades e suas IDs registradas no BD
+  // Fetch na rota /api/getCidades e retorna um object array das cidades e suas IDs registradas no BD
   try {
-    const response = await fetch("/getCidades");
+    const response = await fetch("/api/getCidades");
     if (!response.ok) {
       throw new Error("Failed to fetch cities");
     }
@@ -22,13 +22,13 @@ async function updateVagas(selectedOption) {
   while (selectElement.options.length > 1) {
     selectElement.remove(1); // Always remove the second option (index 1)
   }
-  
+
   // Resetar opção escolhida
   selectElement.value = "";
-  
+
   try {
     var response = await fetch(
-      `http://localhost:3000/query?cidadeID=${selectedOption}`
+      `http://localhost:3000/api/query?cidadeID=${selectedOption}`
     );
     if (!response.ok) {
       throw new Error("Network response was not ok");

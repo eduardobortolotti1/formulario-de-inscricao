@@ -40,7 +40,7 @@
     </nav>
     <div class="main">
 
-        <form action="/submit" method="POST">
+        <form action="/api/submit" method="POST" enctype="multipart/form-data">
             <div class="form-group">
                 <h2>Dados de Cadastro</h2>
             </div>
@@ -102,7 +102,7 @@
             </div>
             <div class="form-group">
                 <label for="file">Arquivo PDF</label><br>
-                <input type="file" class="form-control-file" id="file">
+                <input type="file" class="form-control-file" id="file" name="pdf">
             </div>
             <button type="submit" class="btn btn-primary">Inscrever-se</button>
         </form>

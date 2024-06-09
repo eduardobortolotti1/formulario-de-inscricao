@@ -2,22 +2,20 @@ import express from "express";
 import bodyParser from "body-parser";
 import multer from "multer";
 import pg from "pg";
+import fs from "fs";
+import path from "path";
 
 const port = 3000;
 const app = express();
 
+// Using middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'uploads/');
-  },
-  filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-    cb(null, uniqueSuffix + '-' + file.originalname);
-  }
-});
+// Set EJS as the default view engine
+app.set("view engine", "ejs");
+
+const storage = multer.memoryStorage()
 
 const fileFilter = (req, file, cb) => {
   if (file.mimetype === 'application/pdf') {
@@ -44,15 +42,14 @@ const db = new pg.Client({
 });
 
 db.connect()
-.then(() => console.log("Database connected successfully"))
-.catch((err) => console.error("Database connection error:", err));
-
+  .then(() => console.log("Database connected successfully"))
+  .catch((err) => console.error("Database connection error:", err));
 
 app.get("/", (req, res) => {
-  res.render("index.ejs");
+  res.render("index");
 });
 
-app.post("/submit", upload.single("pdf"), async (req, res) => {
+app.post("/api/submit", upload.single("pdf"), async (req, res) => {
   const {
     nome,
     email,
@@ -63,12 +60,17 @@ app.post("/submit", upload.single("pdf"), async (req, res) => {
     telefone,
     cidade,
     cargo,
-  } = req.body
+  } = req.body;
   const file = req.file;
-  // Checando se todos os valores obrigatórios foram enviados
-  if (!nome || !email || !data_nascimento || !cpf || !rg || !celular || !cidade || !cargo || !file){
-    return res.status(400).json("Bad request");
+
+  // Check if all required fields are present
+  if (!nome || !email || !data_nascimento || !cpf || !rg || !celular || !cidade || !cargo || !file) {
+    return res.status(400).json({ error: "Bad request" });
   }
+
+  // Create pdf_path to save on query
+  const pdf_path = path.join('uploads', `${Date.now()}-${file.originalname}`);
+  console.log(pdf_path);
 
   try {
     // Insert data into PostgreSQL
@@ -76,20 +78,24 @@ app.post("/submit", upload.single("pdf"), async (req, res) => {
       INSERT INTO inscricoes (nome, email, data_nascimento, cpf, rg, celular, telefone, cidade, cargo, pdf_path)
       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
       RETURNING id`;
-    
-    const values = [nome, email, data_nascimento, cpf, rg, celular, telefone, cidade, cargo, file.path];
+
+    const values = [nome, email, data_nascimento, cpf, rg, celular, telefone, cidade, cargo, pdf_path];
 
     const { rows } = await db.query(insertQuery, values);
     const insertedId = rows[0].id;
 
+    // Save the file to /uploads ONLY after the query is successfully made
+    fs.writeFileSync(pdf_path, file.buffer);
     res.status(201).json({ id: insertedId, message: "Data inserted successfully" });
-  } catch (err) {
+
+  }
+  catch (err) {
     console.error('Error executing query', err);
     res.status(500).json({ error: 'Internal server error' });
   }
 });
 
-app.get("/query", async (req, res) => {
+app.get("/api/query", async (req, res) => {
   const cidadeID = req.query.cidadeID;
   if (!cidadeID) {
     return res
@@ -113,7 +119,7 @@ app.get("/query", async (req, res) => {
   }
 });
 
-app.get("/getCidades", async (req, res) => {
+app.get("/api/getCidades", async (req, res) => {
   try {
     const response = (
       await db.query(`
@@ -128,6 +134,22 @@ app.get("/getCidades", async (req, res) => {
       .json({ error: `Bad request. Failed to fetch data for: ${cidadeID}` });
   }
 });
+
+const shutdown = () => {
+  console.log('Shutting down server...');
+  db.end()
+    .then(() => {
+      console.log('Database connection closed.');
+      process.exit(0);
+    })
+    .catch(err => {
+      console.error('Error closing database connection', err);
+      process.exit(1);
+    });
+};
+
+process.on('SIGTERM', shutdown);
+process.on('SIGINT', shutdown);
 
 app.listen(port, () => {
   console.log(`Listening on http://localhost:${port}`);
