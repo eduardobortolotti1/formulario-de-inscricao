@@ -5,289 +5,80 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulário UEPA</title>
+    <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <style>
-        .main {
-            max-width: 1200px;
-            padding: 4rem;
-        }
-    </style>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
 </head>
 
 <body>
     <div class="main">
         <form action="/submit" method="POST">
             <div class="form-group">
-                <label for="nome">Nome completo</label>
-                <input type="text" class="form-control" id="nome" name="nome" placeholder="" required>
+                <h2>Dados de Cadastro</h2>
             </div>
             <div class="form-group">
-                <label for="nome_pai">Nome completo do pai</label>
-                <input type="email" class="form-control" id="nome_pai" name="nome_pai" placeholder="" required>
+                <label for="email">Nome completo</label>
+                <input type="text" class="form-control" name="email" id="email" required>
             </div>
             <div class="form-group">
-                <label for="nome_mae">Nome completo da mãe</label>
-                <input type="email" class="form-control" id="nome_mae" name="nome_mae" placeholder="" required>
+                <label for="email">Endereço Email</label>
+                <input type="text" class="form-control" name="email" id="email" required>
             </div>
             <div class="form-group">
-                <label for="data_nascimento">Data de nascimento</label>
-                <input type="date" class="form-control" id="data_nascimento" name="data_nascimento" placeholder="" required>
-            </div>
-            <div class="form-group">
-                <label for="cidade_nascimento">Cidade de nascimento</label>
-                <input type="email" class="form-control" id="cidade_nascimento" name="cidade_nascimento" placeholder="" required>
-            </div>
-            <div class="form-group">
-                <label for="estado_civil">Estado Civil</label>
-                <input type="email" class="form-control" id="estado_civil" name="estado_civil" placeholder="" required>
-            </div>
-            <div class="form-group">
-                <label for="rg">RG</label>
-                <input type="email" class="form-control" id="rg" name="rg" placeholder="" required>
-            </div>
-            <div class="form-group">
-                <label for="orgao_emissor">Órgão emissor</label>
-                <input type="email" class="form-control" id="orgao_emissor" name="orgao_emissor" placeholder="" required>
-            </div>
-            <div class="form-group">
-                <label for="data_expedicao">Data de expedição</label>
-                <input type="date" class="form-control" id="data_expedicao" name="data_expedicao" placeholder="" required>
-            </div>
-            <div class="form-group">
-                <label for="cpf">CPF</label>
-                <input type="text" class="form-control" id="cpf" name="cpf" placeholder="" required>
-            </div>
-            <div class="form-group">
-                <label for="ctps">CTPS nº</label>
-                <input type="email" class="form-control" id="ctps" name="ctps" placeholder="" required>
-            </div>
-            <div class="form-group">
-                <label for="serie">Série</label>
-                <input type="email" class="form-control" id="serie" name="serie" placeholder="" required>
-            </div>
-            <div class="form-group">
-                <label for="categoria">Categoria</label>
-                <input type="email" class="form-control" id="categoria" name="categoria" placeholder="" required>
-            </div>
-
-            <label>Certidão de:</label>
-            <div class="form-check">
-                <label class="form-check-label" for="casamento">
-                    Casamento
-                </label>
-                <input class="form-check-input" type="radio" name="tipo_certidao" id="casamento" value="casamento">
-            </div>
-            <div class="form-check">
-                <label class="form-check-label" for="nascimento">
-                    Nascimento
-                </label>
-                <input class="form-check-input" type="radio" name="tipo_certidao" id="nascimento" value="nascimento">
-            </div>
-
-            <div class="form-group">
-                <label for="exampleInputEmail1">Raça</label>
-                <input type="email" class="form-control" id="email" name="" placeholder="" required>
-            </div>
-            <div class="form-group">
-                <label for="exampleInputEmail1">Endereço</label>
-                <input type="email" class="form-control" id="email" name="" placeholder="" required>
-            </div>
-            <div class="form-group">
-                <label for="exampleInputEmail1">Bairro</label>
-                <input type="email" class="form-control" id="email" name="" placeholder="" required>
-            </div>
-            <div class="form-group">
-                <label for="exampleInputEmail1">CEP</label>
-                <input type="email" class="form-control" id="email" name="" placeholder="" required>
-            </div>
-            <div class="form-group">
-                <label for="exampleInputEmail1">Cidade</label>
-                <input type="email" class="form-control" id="email" name="" placeholder="" required>
-            </div>
-            <div class="form-group">
-                <label for="exampleInputEmail1">UF</label>
-                <input type="email" class="form-control" id="email" name="" placeholder="" required>
-            </div>
-            <label>Fone:</label>
-            <div class="row">
-                <div class="col">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Telefone</label>
-                        <input type="email" class="form-control" id="email" name="" placeholder="">
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Celular</label>
-                        <input type="email" class="form-control" id="email" name="" placeholder="" required>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="exampleInputEmail1">E-mail</label>
-                <input type="email" class="form-control" id="email" name="" placeholder="" required>
-            </div>
-
-            <label>DADOS DE FORMAÇÃO</label><br>
-            <label>Escolaridade:</label><br>
-
-            <div class="form-group">
-                <label>Ensino fundamental: </label>
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label" for="estado_ensino_fundamental">
-                        Completo
-                    </label>
-                    <input class="form-check-input" type="radio" name="estado_ensino_fundamental" id="estado_ensino_fundamental" value="completo">
-                </div>
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label" for="estado_ensino_fundamental">
-                        Incompleto
-                    </label>
-                    <input class="form-check-input" type="radio" name="estado_ensino_fundamental" id="estado_ensino_fundamental" value="incompleto">
-                </div>
                 <div class="row">
                     <div class="col">
-                        <div class="form-group">
-                            <label for="data_inicio_fundamental">Início:</label>
-                            <input type="date" class="form-control" id="data_inicio_fundamental" name="data_inicio_fundamental" placeholder="" required>
-                        </div>
+                        <label for="cpf">CPF</label>
+                        <input type="text" class="form-control" name="cpf" id="cpf" placeholder="123.456.789-00" required>
                     </div>
                     <div class="col">
-                        <div class="form-group">
-                            <label for="data_termino_fundamental">Fim:</label>
-                            <input type="date" class="form-control" id="data_termino_fundamental" name="data_termino_fundamental" placeholder="" required>
-                        </div>
+                        <label for="rg">RG</label>
+                        <input type="text" class="form-control" name="rg" id="rg" required>
                     </div>
                 </div>
             </div>
 
             <div class="form-group">
-                <label>Ensino médio: </label>
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label" for="estado_ensino_medio">
-                        Completo
-                    </label>
-                    <input class="form-check-input" type="radio" name="estado_ensino_medio" id="estado_ensino_medio" value="completo">
-                </div>
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label" for="estado_ensino_medio">
-                        Incompleto
-                    </label>
-                    <input class="form-check-input" type="radio" name="estado_ensino_medio" id="estado_ensino_medio" value="incompleto">
-                </div>
+                <h4>Fone:</h4>
+            </div>
+            <div class="form-group">
                 <div class="row">
                     <div class="col">
-                        <div class="form-group">
-                            <label for="data_inicio_medio">Início:</label>
-                            <input type="date" class="form-control" id="data_inicio_medio" name="data_inicio_medio" placeholder="" required>
-                        </div>
+                        <label for="email">Celular</label>
+                        <input type="text" class="form-control" name="celular" id="celular" required>
                     </div>
                     <div class="col">
-                        <div class="form-group">
-                            <label for="data_termino_medio">Fim:</label>
-                            <input type="date" class="form-control" id="data_termino_medio" name="data_termino_medio" placeholder="" required>
-                        </div>
-                    </div>
-                </div>                
-            </div>
-
-            <div class="form-group">
-                <label>Ensino superior: </label>
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label" for="estado_ensino_superior">
-                        Completo
-                    </label>
-                    <input class="form-check-input" type="radio" name="estado_ensino_superior" id="estado_ensino_superior" value="completo">
-                </div>
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label" for="estado_ensino_superior">
-                        Incompleto
-                    </label>
-                    <input class="form-check-input" type="radio" name="estado_ensino_superior" id="estado_ensino_superior" value="incompleto">
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <div class="form-group">
-                            <label for="data_inicio_superior">Início:</label>
-                            <input type="date" class="form-control" id="data_inicio_superior" name="data_inicio_superior" placeholder="" required>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="form-group">
-                            <label for="data_termino_fundamental">Fim:</label>
-                            <input type="date" class="form-control" id="data_termino_superior" name="data_termino_superior" placeholder="" required>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="form-group">
-                <label for="pos_graduacao">Pós-graduação:</label>
-                <input type="text" class="form-control" name="pos_graduacao" id="pos_graduacao" required>
-            </div>
-            <div class="form-group">
-                <label for="especializacao">Especialização</label>
-                <input type="text" class="form-control" name="especializacao" id="especializacao" required>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <div class="form-group">
-                        <label for="data_inicio_especializacao">Início:</label>
-                        <input type="date" class="form-control" id="data_inicio_especializacao" name="data_inicio_especializacao" placeholder="" required>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="form-group">
-                        <label for="data_termino_especializacao">Fim:</label>
-                        <input type="date" class="form-control" id="data_termino_especializacao" name="data_termino_especializacao" placeholder="" required>
+                        <label for="email">Telefone (opcional)</label>
+                        <input type="text" class="form-control" name="telefone" id="telefone">
                     </div>
                 </div>
             </div>
 
             <div class="form-group">
-                <label for="mestrado">Mestrado:</label>
-                <input type="text" class="form-control" name="mestrado" id="mestrado" required>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <div class="form-group">
-                        <label for="data_inicio_mestrado">Início:</label>
-                        <input type="date" class="form-control" id="data_inicio_mestrado" name="data_inicio_mestrado" placeholder="" required>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="form-group">
-                        <label for="data_termino_mestrado">Fim:</label>
-                        <input type="date" class="form-control" id="data_termino_mestrado" name="data_termino_mestrado" placeholder="" required>
-                    </div>
-                </div>
+                <h4>Município</h4>
             </div>
 
             <div class="form-group">
-                <label for="doutorado">Doutorado:</label>
-                <input type="text" class="form-control" name="doutorado" id="doutorado" required>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <div class="form-group">
-                        <label for="data_inicio_doutorado">Início:</label>
-                        <input type="date" class="form-control" id="data_inicio_doutorado" name="data_inicio_doutorado" placeholder="" required>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="form-group">
-                        <label for="data_termino_doutorado">Fim:</label>
-                        <input type="date" class="form-control" id="data_termino_doutorado" name="data_termino_doutorado" placeholder="" required>
-                    </div>
-                </div>
+                <label for="cidade_select">Localização:</label>
+                <select class="form-control" id="cidade_select" name="cidade" onchange=updateVagas(this) required>
+                    <option value="" disabled selected class="text-muted">Escolha uma cidade</option>
+                </select>
             </div>
 
             <div class="form-group">
-                <label for="data">Data:</label>
+                <label for="vaga_select">Selecione a vaga:</label>
+                <select class="form-control" id="vaga_select" name="vaga" required>
+                    <option value="" disabled selected class="text-muted">Escolha uma vaga</option>
+                </select>
             </div>
+            <button type="submit" class="btn btn-primary">Inscrever-se</button>
         </form>
     </div>
+
+    <script src="./scripts/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
 </body>
 

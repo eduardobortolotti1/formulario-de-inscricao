@@ -1,0 +1,30 @@
+* {
+    color: white;
+    font-family: Ubuntu, Arial, Helvetica, sans-serif;
+}
+
+body {
+    background-color: rgb(73, 73, 73);
+}
+
+.main {
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 4rem;
+}
+
+form {
+    border: 1px solid #3572EF;
+    border-radius: 10px;
+    padding: 50px;
+    max-width: 700px;
+    margin: auto;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+form label {
+    font-size: 1.2rem;
+}
