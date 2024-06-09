@@ -1,20 +1,24 @@
 import express from "express";
 import bodyParser from "body-parser";
-import multer from "multer";
 import pg from "pg";
+
+// File storage handling
+import multer from "multer";
 import fs from "fs";
 import path from "path";
+
+// Data sanitization and validation functions
+import { remove_not_num, testacpf } from './utils.js';
+import validator from "email-validator";
 
 const port = 3000;
 const app = express();
 
-// Using middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
-
-// Set EJS as the default view engine
 app.set("view engine", "ejs");
 
+// Using memoryStorage engine
 const storage = multer.memoryStorage()
 
 const fileFilter = (req, file, cb) => {
@@ -28,7 +32,7 @@ const fileFilter = (req, file, cb) => {
 const upload = multer({
   storage: storage,
   limits: {
-    fileSize: 15 * 1024 * 1024 // 15 MB
+    fileSize: 15 * 1024 * 1024 // 15 MB MAX
   },
   fileFilter: fileFilter
 });
@@ -50,7 +54,7 @@ app.get("/", (req, res) => {
 });
 
 app.post("/api/submit", upload.single("pdf"), async (req, res) => {
-  const {
+  let {
     nome,
     email,
     data_nascimento,
@@ -63,17 +67,32 @@ app.post("/api/submit", upload.single("pdf"), async (req, res) => {
   } = req.body;
   const file = req.file;
 
+  // Data sanitization
+  cpf = remove_not_num(cpf);
+  rg = remove_not_num(rg);
+  celular = remove_not_num(celular);
+  telefone = remove_not_num(telefone);
+  cidade = remove_not_num(cidade);
+  cargo = remove_not_num(cargo);
+
   // Check if all required fields are present
   if (!nome || !email || !data_nascimento || !cpf || !rg || !celular || !cidade || !cargo || !file) {
     return res.status(400).json({ error: "Bad request" });
   }
 
+  // Data validation
+  if (!(testacpf(cpf))) {
+    return res.status(400).json({ error: "CPF inválido" });
+  }
+  if (!(validator.validate(email))) {
+    return res.status(400).json({ error: "Email inválido" });
+  }
+
   // Create pdf_path to save on query
   const pdf_path = path.join('uploads', `${Date.now()}-${file.originalname}`);
-  console.log(pdf_path);
 
   try {
-    // Insert data into PostgreSQL
+    // Parametized query to prevent SQl injection attacks
     const insertQuery = `
       INSERT INTO inscricoes (nome, email, data_nascimento, cpf, rg, celular, telefone, cidade, cargo, pdf_path)
       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
