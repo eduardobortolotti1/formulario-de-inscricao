@@ -38,7 +38,7 @@ async function updateVagas(selectedOption) {
     // Update the select options here
     vagas.forEach((vaga) => {
       let option = document.createElement("option");
-      option.value = vaga["cargo_id"];
+      option.value = vaga["id"];
       option.textContent = vaga["nome_cargo"];
       selectElement.appendChild(option);
     });

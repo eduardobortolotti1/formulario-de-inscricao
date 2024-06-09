@@ -1,21 +1,35 @@
 * {
-    color: white;
+    font-size: 1.2rem;
+    color: #050c9c;
     font-family: Ubuntu, Arial, Helvetica, sans-serif;
 }
 
-body {
-    background-color: rgb(73, 73, 73);
-}
+body {}
 
 .main {
     margin: 0 auto;
-    max-width: 1200px;
     padding: 4rem;
+    background-color: #f0f4ff;
+}
+
+nav {
+    background-color: #f0f4ff;
+    border-bottom: 1px solid #312783;
+    width: 100%;
+    padding: 5px !important;
+}
+
+nav .navbar-brand {
+    max-width: 450px;
+    height: auto;
+}
+
+nav ul li {
+    margin-left: 50px;
 }
 
 form {
-    border: 1px solid #3572EF;
-    border-radius: 10px;
+    max-width: 1200px;
     padding: 50px;
     max-width: 700px;
     margin: auto;
@@ -27,4 +41,8 @@ form {
 
 form label {
     font-size: 1.2rem;
+}
+
+footer ul li a i {
+    font-size: 1.5rem;
 }
