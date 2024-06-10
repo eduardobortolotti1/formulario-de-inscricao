@@ -1,31 +1,37 @@
 import express from "express";
 import bodyParser from "body-parser";
 import pg from "pg";
-
+import session from "express-session";
+import flash from "express-flash";
 // File storage handling
 import multer from "multer";
 import fs from "fs";
 import path from "path";
-
 // Data sanitization and validation functions
-import { remove_not_num, testacpf } from './utils.js';
+import { remove_not_num, testacpf } from "./utils.js";
 import validator from "email-validator";
 
 const port = 3000;
 const app = express();
-
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.set("view engine", "ejs");
+
+app.use(session({
+  secret: "uepa_2024", // Replace "your_secret_key" with a strong, unique string
+  resave: false,
+  saveUninitialized: true
+}));
+app.use(flash());
 
 // Using memoryStorage engine
 const storage = multer.memoryStorage()
 
 const fileFilter = (req, file, cb) => {
-  if (file.mimetype === 'application/pdf') {
+  if (file.mimetype === "application/pdf") {
     cb(null, true);
   } else {
-    cb(new Error('Only PDFs are allowed'), false);
+    cb(new Error("Only PDFs are allowed"), false);
   }
 };
 
@@ -60,15 +66,17 @@ app.get("/form", (req, res) => {
 
 app.post("/api/submit", (req, res) => {
   // Mounting multer manually and using a callback function to handle file uploading errors.
-  upload.single('pdf')(req, res, function (err) {
+  upload.single("pdf")(req, res, function (err) {
     if (err instanceof multer.MulterError) {
       // A Multer error occurred when uploading.
-      console.error('Multer error:', err);
-      return res.status(400).redirect("/form");
+      console.error("Multer error:", err);
+      req.flash("error", "ERRO: APENAS PDFs são permitidos!");
+      return res.status(400).render("form");
     } else if (err) {
       // An unknown error occurred.
-      console.error('Unknown error during file upload:', err);
-      return res.status(500).redirect("/form");
+      console.error("Unknown error during file upload:", err);
+      req.flash("error", "ERRO: Algo deu errado ao salvar seu arquivo!")
+      return res.status(500).render("form");
     }
 
     // Proceed to handle the form data if no error occurred
@@ -91,7 +99,7 @@ app.post("/api/submit", (req, res) => {
     // DATA VALIDATION, before and after sanitization
     // Check if all required fields are present
     if (!nome || !email || !data_nascimento || !cpf || !rg || !celular || !cidade || !cargo || !file) {
-      return res.status(400).redirect("/form");
+      return res.status(400).render("form");
     }
 
     // Data sanitization
@@ -104,19 +112,21 @@ app.post("/api/submit", (req, res) => {
 
     // Check if all required fields are present
     if (!nome || !email || !data_nascimento || !cpf || !rg || !celular || !cidade || !cargo || !file) {
-      return res.status(400).redirect("/form");
+      req.flash("error", "ERRO: Algo deu errado no seu registro!")
+      return res.status(400).render("form");
     }
-
     // Data validation
     if (!(testacpf(cpf))) {
-      return res.status(400).redirect("/form");
+      req.flash("error", "ERRO: Algo deu errado no seu registro!")
+      return res.status(400).render("form");
     }
     if (!(validator.validate(email))) {
-      return res.status(400).redirect("/form");
+      req.flash("error", "ERRO: Algo deu errado no seu registro!")
+      return res.status(400).render("form");
     }
 
     // Create pdf_path to save file after query
-    const pdf_path = path.join('uploads', `${Date.now()}.pdf`);
+    const pdf_path = path.join("uploads", `${Date.now()}.pdf`);
 
     try {
       // Parametized query to prevent SQl injection attacks
@@ -129,16 +139,20 @@ app.post("/api/submit", (req, res) => {
       await db.query("BEGIN");
       const { rows } = await db.query(insertQuery, values);
       const insertedId = rows[0].id;
+      await db.query("COMMIT");
 
       // Save the file to /uploads ONLY after the query is successfully made
       fs.writeFileSync(pdf_path, file.buffer);
-      await db.query("COMMIT");
-      return res.status(201).redirect("/form");
+      // Return success message
+      req.flash("success", "Sua inscrição foi feita com sucesso!");
+
+      return res.status(201).render("form");
     }
     catch (err) {
-      await db.query('ROLLBACK'); // Rollback in case of error
-      console.error('Error executing query', err);
-      return res.status(400).redirect("/form");
+      await db.query("ROLLBACK"); // Rollback in case of error
+      console.error("Error executing query", err);
+      req.flash("error", "ERRO: Algo deu errado no seu registro!")
+      return res.status(400).render("form");
     }
   }
 })
@@ -184,20 +198,20 @@ app.get("/api/getCidades", async (req, res) => {
 });
 
 const shutdown = () => {
-  console.log('Shutting down server...');
+  console.log("Shutting down server...");
   db.end()
     .then(() => {
-      console.log('Database connection closed.');
+      console.log("Database connection closed.");
       process.exit(0);
     })
     .catch(err => {
-      console.error('Error closing database connection', err);
+      console.error("Error closing database connection", err);
       process.exit(1);
     });
 };
 
-process.on('SIGTERM', shutdown);
-process.on('SIGINT', shutdown);
+process.on("SIGTERM", shutdown);
+process.on("SIGINT", shutdown);
 
 app.listen(port, () => {
   console.log(`Listening on http://localhost:${port}`);

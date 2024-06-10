@@ -39,12 +39,37 @@
             font-size: 1rem;
             max-width: 100%;
         }
+
+        .flash-message {
+            margin: auto;
+            border-radius: 5px;
+            padding: 15px;
+            width: 700px;
+            background-color: rgb(255, 223, 83);
+        }
+
+        .flash-message p {
+            width: fit-content;
+            margin: 0;
+        }
     </style>
 </head>
 
 <body>
     <%- include("./partials/navbar.ejs") %>
     <div class="main container-fluid">
+        <% if (messages.error) { %>
+        <div class="flash-message d-flex justify-content-center align-items-center flex-column">
+            <h4>AVISO</h4>
+            <p><%= messages.error %></p>
+        </div>
+        <% } else if (messages.success) { %>
+        <div class="flash-message d-flex justify-content-center align-items-center flex-column">
+            <h4>AVISO</h4>
+            <p><%= messages.success %></p>
+        </div>
+        <% } %>
+
 
         <form action="/api/submit" method="POST" enctype="multipart/form-data" class="container">
             <div class="form-group">
@@ -56,7 +81,7 @@
             </div>
             <div class="form-group">
                 <label for="email">Endereço Email</label>
-                <input type="text" class="form-control" name="email" id="email"placeholder="Digite endereço Email" required>
+                <input type="text" class="form-control" name="email" id="email" placeholder="Digite endereço Email" required>
             </div>
             <div class="form-group">
                 <label for="data_nascimento">Data de nascimento</label>
@@ -116,7 +141,7 @@
 
     <%- include("./partials/footer.ejs") %>
 
-    <script src="./scripts/index.js"></script>
+    <script src="/scripts/index.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
 </body>
