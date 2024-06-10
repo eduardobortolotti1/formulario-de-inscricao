@@ -22,8 +22,8 @@ Para executar este projeto localmente, siga os passos abaixo:
 1. **Clone o repositório:**
 
    ```bash
-   git clone https://github.com/seu-usuario/nome-do-repositorio.git
-   cd nome-do-repositorio
+   git clone [https://github.com/seu-usuario/nome-do-repositorio.git](https://github.com/eduardobortolotti1/formulario-de-inscricao/)
+   cd formulario-de-inscricao
     ```
 2. **Instale as dependências:**
     ```bash
