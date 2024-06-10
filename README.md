@@ -23,14 +23,18 @@ Para executar este projeto localmente, siga os passos abaixo:
 
    ```bash
    git clone https://github.com/seu-usuario/nome-do-repositorio.git
+    ```
+2. **Vá para o diretório criado:**
+    ```bash
    cd nome-do-repositorio
     ```
-2. **Instale as dependências:**
+3. **Instale as dependências:**
     ```bash
     npm install
     ```
-2. **Importe o banco de dados no PostgreSQL:**
+4. **Importe o banco de dados no PostgreSQL:**
 Entre no usuário postgres
+**(Lembre-se de adicionar "C:\Program Files\PostgreSQL\[SUA VERSÃO DO POSGRESQL]\bin" para as varíaveis de ambiente do sistema)**
     ```bash
     psql -U postgres
     ```
@@ -38,18 +42,17 @@ Entre no usuário postgres
     ```sql
     CREATE DATABASE form;
     ```
-    Importe a database existente para a recém criada
+    Saia da CLI do psql (CTRL-C) e importe a database existente (form_database.sql) para a recém criada
     ```bash
-    \c form; #Entre na database criada
-    \i C:/diretorio/ate/arquivo/form_database.sql
+    psql -U postgres -d form -f "C:/diretorio/ate/arquivo/form_database.sql"
     ```
     **Não se esqueça de alterar o usuário, senha, porta e host da conexão feita em index.js !**
 
-3. **Execute o servidor**:
+5. **Execute o servidor:**:
     ```bash
     node index.js
     ```
-4. **Acesse o site**:
+6. **Acesse o site:**:
     Abra o navegador e vá para http://localhost:3000/.
 
 ### Screenshots
