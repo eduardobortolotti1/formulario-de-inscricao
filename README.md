@@ -56,4 +56,4 @@ Adicione aqui screenshots do seu projeto para ilustrar seu funcionamento.
 
 ### Créditos
 
-Este projeto foi desenvolvido como parte do curso de Engenharia de Software da Universidade do Estado do Pará (UEPA), como parte do trabalho final da disciplina.
+Este projeto foi desenvolvido como parte do curso de Engenharia de Software da Universidade do Estado do Pará (UEPA), como parte do trabalho final da disciplina de Desenvolvimento Web.
