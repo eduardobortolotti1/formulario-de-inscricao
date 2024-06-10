@@ -8,7 +8,7 @@ O site permite que usuários preencham um formulário com seus dados pessoais e 
 
 O formulário segue as especificações de inscrição do processo de inscrição para o EDITAL Nº 061/ 2023-UEPA.
 
-## Instalação
+## Instalação:
 
 Para executar este projeto localmente, siga os passos abaixo:
 
