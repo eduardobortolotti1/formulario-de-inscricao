@@ -1,6 +1,6 @@
 # Site de Formulário usando Node.js, PostgreSQL, Multer, Express e EJS.
 
-## Sobre o Projeto
+## Sobre o Projeto:
 
 Este é um projeto de um site de formulário que utiliza Node.js no backend para lidar com requisições, PostgreSQL como banco de dados para armazenamento dos dados dos formulários, Multer para upload de arquivos, Express como framework web, e EJS como engine de templates para renderização das páginas HTML.
 
