@@ -66,5 +66,6 @@ async function atualizarCidades() {
 document.addEventListener("DOMContentLoaded", atualizarCidades);
 
 // Resetar opções escolhidas ao carregar a página
+(document.getElementById("file")).value = "";
 (document.getElementById("cidade_select")).value = "";
 (document.getElementById("vaga_select")).value = "";

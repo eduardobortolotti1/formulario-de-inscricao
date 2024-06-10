@@ -1,0 +1,15 @@
+nav {
+    background-color: #f0f4ff;
+    border-bottom: 1px solid #9095ff;
+    width: 100%;
+    padding: 5px !important;
+}
+
+nav .navbar-brand {
+    max-width: 450px;
+    height: auto;
+}
+
+nav ul li {
+    margin-left: 50px;
+}
