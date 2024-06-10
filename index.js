@@ -37,6 +37,7 @@ const upload = multer({
   fileFilter: fileFilter
 });
 
+// PosgreSQL connection. CHANGE CREDENTIALS AS NEEDED!
 const db = new pg.Client({
   user: "postgres",
   password: "jogador9",
@@ -57,71 +58,90 @@ app.get("/form", (req, res) => {
   res.render("form");
 });
 
-app.post("/api/submit", upload.single("pdf"), async (req, res) => {
-  let {
-    nome,
-    email,
-    data_nascimento,
-    cpf,
-    rg,
-    celular,
-    telefone,
-    cidade,
-    cargo,
-  } = req.body;
-  const file = req.file;
+app.post("/api/submit", (req, res) => {
+  // Mounting multer manually and using a callback function to handle file uploading errors.
+  upload.single('pdf')(req, res, function (err) {
+    if (err instanceof multer.MulterError) {
+      // A Multer error occurred when uploading.
+      console.error('Multer error:', err);
+      return res.status(400).redirect("/form");
+    } else if (err) {
+      // An unknown error occurred.
+      console.error('Unknown error during file upload:', err);
+      return res.status(500).redirect("/form");
+    }
 
-  // DATA VALIDATION, before and after sanitization
-  // Check if all required fields are present
-  if (!nome || !email || !data_nascimento || !cpf || !rg || !celular || !cidade || !cargo || !file) {
-    return res.status(400).redirect("/form");
-  }
+    // Proceed to handle the form data if no error occurred
+    handleFormData(req, res);
+  });
+  async function handleFormData(req, res) {
+    let {
+      nome,
+      email,
+      data_nascimento,
+      cpf,
+      rg,
+      celular,
+      telefone,
+      cidade,
+      cargo,
+    } = req.body;
+    const file = req.file;
 
-  // Data sanitization
-  cpf = remove_not_num(cpf);
-  rg = remove_not_num(rg);
-  celular = remove_not_num(celular);
-  telefone = remove_not_num(telefone);
-  cidade = remove_not_num(cidade);
-  cargo = remove_not_num(cargo);
+    // DATA VALIDATION, before and after sanitization
+    // Check if all required fields are present
+    if (!nome || !email || !data_nascimento || !cpf || !rg || !celular || !cidade || !cargo || !file) {
+      return res.status(400).redirect("/form");
+    }
 
-  // Check if all required fields are present
-  if (!nome || !email || !data_nascimento || !cpf || !rg || !celular || !cidade || !cargo || !file) {
-    return res.status(400).redirect("/form");
-  }
+    // Data sanitization
+    cpf = remove_not_num(cpf);
+    rg = remove_not_num(rg);
+    celular = remove_not_num(celular);
+    telefone = remove_not_num(telefone);
+    cidade = remove_not_num(cidade);
+    cargo = remove_not_num(cargo);
 
-  // Data validation
-  if (!(testacpf(cpf))) {
-    return res.status(400).redirect("/form");
-  }
-  if (!(validator.validate(email))) {
-    return res.status(400).redirect("/form");
-  }
+    // Check if all required fields are present
+    if (!nome || !email || !data_nascimento || !cpf || !rg || !celular || !cidade || !cargo || !file) {
+      return res.status(400).redirect("/form");
+    }
 
-  // Create pdf_path to save on query
-  const pdf_path = path.join('uploads', `${Date.now()}.pdf`);
+    // Data validation
+    if (!(testacpf(cpf))) {
+      return res.status(400).redirect("/form");
+    }
+    if (!(validator.validate(email))) {
+      return res.status(400).redirect("/form");
+    }
 
-  try {
-    // Parametized query to prevent SQl injection attacks
-    const insertQuery = `
+    // Create pdf_path to save file after query
+    const pdf_path = path.join('uploads', `${Date.now()}.pdf`);
+
+    try {
+      // Parametized query to prevent SQl injection attacks
+      const insertQuery = `
       INSERT INTO inscricoes (nome, email, data_nascimento, cpf, rg, celular, telefone, cidade, cargo, pdf_path)
       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
       RETURNING id`;
 
-    const values = [nome, email, data_nascimento, cpf, rg, celular, telefone, cidade, cargo, pdf_path];
+      const values = [nome, email, data_nascimento, cpf, rg, celular, telefone, cidade, cargo, pdf_path];
+      await db.query("BEGIN");
+      const { rows } = await db.query(insertQuery, values);
+      const insertedId = rows[0].id;
 
-    const { rows } = await db.query(insertQuery, values);
-    const insertedId = rows[0].id;
-
-    // Save the file to /uploads ONLY after the query is successfully made
-    fs.writeFileSync(pdf_path, file.buffer);
-    return res.status(201).redirect("/form");
+      // Save the file to /uploads ONLY after the query is successfully made
+      fs.writeFileSync(pdf_path, file.buffer);
+      await db.query("COMMIT");
+      return res.status(201).redirect("/form");
+    }
+    catch (err) {
+      await db.query('ROLLBACK'); // Rollback in case of error
+      console.error('Error executing query', err);
+      return res.status(400).redirect("/form");
+    }
   }
-  catch (err) {
-    console.error('Error executing query', err);
-    return res.status(400).redirect("/form");
-  }
-});
+})
 
 app.get("/api/query", async (req, res) => {
   const cidadeID = req.query.cidadeID;
