@@ -1,6 +1,6 @@
 # VSCode
 .vscode/
-uploads/
+uploads/*
 
 # Logs
 logs

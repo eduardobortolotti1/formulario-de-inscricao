@@ -54,7 +54,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/form", (req, res) => {
-  res.render("form")
+  res.render("form");
 });
 
 app.post("/api/submit", upload.single("pdf"), async (req, res) => {
@@ -71,6 +71,12 @@ app.post("/api/submit", upload.single("pdf"), async (req, res) => {
   } = req.body;
   const file = req.file;
 
+  // DATA VALIDATION, before and after sanitization
+  // Check if all required fields are present
+  if (!nome || !email || !data_nascimento || !cpf || !rg || !celular || !cidade || !cargo || !file) {
+    return res.status(400).redirect("/form");
+  }
+
   // Data sanitization
   cpf = remove_not_num(cpf);
   rg = remove_not_num(rg);
@@ -81,19 +87,19 @@ app.post("/api/submit", upload.single("pdf"), async (req, res) => {
 
   // Check if all required fields are present
   if (!nome || !email || !data_nascimento || !cpf || !rg || !celular || !cidade || !cargo || !file) {
-    return res.status(400).json({ error: "Bad request" });
+    return res.status(400).redirect("/form");
   }
 
   // Data validation
   if (!(testacpf(cpf))) {
-    return res.status(400).json({ error: "CPF inválido" });
+    return res.status(400).redirect("/form");
   }
   if (!(validator.validate(email))) {
-    return res.status(400).json({ error: "Email inválido" });
+    return res.status(400).redirect("/form");
   }
 
   // Create pdf_path to save on query
-  const pdf_path = path.join('uploads', `${Date.now()}-${file.originalname}`);
+  const pdf_path = path.join('uploads', `${Date.now()}.pdf`);
 
   try {
     // Parametized query to prevent SQl injection attacks
@@ -109,12 +115,11 @@ app.post("/api/submit", upload.single("pdf"), async (req, res) => {
 
     // Save the file to /uploads ONLY after the query is successfully made
     fs.writeFileSync(pdf_path, file.buffer);
-    res.status(201).json({ id: insertedId, message: "Data inserted successfully" });
-
+    return res.status(201).redirect("/form");
   }
   catch (err) {
     console.error('Error executing query', err);
-    res.status(500).json({ error: 'Internal server error' });
+    return res.status(400).redirect("/form");
   }
 });
 
