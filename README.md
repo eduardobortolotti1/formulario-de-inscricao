@@ -34,7 +34,7 @@ Para executar este projeto localmente, siga os passos abaixo:
     ```
 4. **Importe o banco de dados no PostgreSQL:**
 Entre no usuário postgres
-**(Lembre-se de adicionar "C:\Program Files\PostgreSQL\[SUA VERSÃO DO POSGRESQL]\bin" para as varíaveis de ambiente do sistema)**
+**(Lembre-se de adicionar "C:/Program Files/PostgreSQL/[SUA VERSÃO DO POSGRESQL]/bin" para as varíaveis de ambiente do sistema)**
     ```bash
     psql -U postgres
     ```
