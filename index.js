@@ -53,6 +53,10 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
+app.get("/form", (req, res) => {
+  res.render("form")
+});
+
 app.post("/api/submit", upload.single("pdf"), async (req, res) => {
   let {
     nome,

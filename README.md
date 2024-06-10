@@ -43,7 +43,7 @@ Entre no usuário postgres
     \c form; #Entre na database criada
     \i C:/diretorio/ate/arquivo/form_database.sql
     ```
-    Não se esqueça de alterar o usuário, senha, porta e host da conexão feita em index.js !
+    **Não se esqueça de alterar o usuário, senha, porta e host da conexão feita em index.js !**
 
 3. **Execute o servidor**:
     ```bash
@@ -54,7 +54,7 @@ Entre no usuário postgres
 
 ### Screenshots
 Database Schema
-![Database Schema](https://i.ibb.co/QMcfp4z/database-schema.png "Text to show on mouseover").
+![Database Schema](https://i.ibb.co/QMcfp4z/database-schema.png "Text to show on mouseover")
 Adicione aqui screenshots do seu projeto para ilustrar seu funcionamento.
 
 ### Créditos
