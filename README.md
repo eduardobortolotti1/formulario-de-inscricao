@@ -22,19 +22,19 @@ Para executar este projeto localmente, siga os passos abaixo:
 1. **Clone o repositório:**
 
    ```bash
-   git clone https://github.com/seu-usuario/nome-do-repositorio.git
+   git clone https://github.com/eduardobortolotti1/formulario-de-inscricao
     ```
 2. **Vá para o diretório criado:**
     ```bash
-   cd nome-do-repositorio
+   cd formulario-de-inscricao
     ```
 3. **Instale as dependências:**
     ```bash
     npm install
     ```
 4. **Importe o banco de dados no PostgreSQL:**
-Entre no usuário postgres
-**(Lembre-se de adicionar "C:/Program Files/PostgreSQL/[SUA VERSÃO DO POSGRESQL]/bin" para as varíaveis de ambiente do sistema)**
+    Entre no usuário postgres
+    **(Lembre-se de adicionar "C:/Program Files/PostgreSQL/[SUA VERSÃO DO POSGRESQL]/bin" para as varíaveis de ambiente do sistema)**
     ```bash
     psql -U postgres
     ```
@@ -44,20 +44,20 @@ Entre no usuário postgres
     ```
     Saia da CLI do psql (CTRL-C) e importe a database existente (form_database.sql) para a recém criada
     ```bash
-    psql -U postgres -d form -f "C:/diretorio/ate/arquivo/form_database.sql"
+    psql -U postgres -d form -f "C:/diretorio/ate/arquivo/form_database.sql" #O arquivo está dentro da pasta do projeto
     ```
     **Não se esqueça de alterar o usuário, senha, porta e host da conexão feita em index.js !**
 
-5. **Execute o servidor:**:
+5. **Execute o servidor:**
     ```bash
     node index.js
     ```
-6. **Acesse o site:**:
-    Abra o navegador e vá para http://localhost:3000/.
+6. **Acesse o site:**
+    Abra o navegador e vá para http://localhost:3000/
 
 ### Screenshots
 Database Schema
-![Database Schema](https://i.ibb.co/QMcfp4z/database-schema.png "Text to show on mouseover")
+![Database Schema](https://i.ibb.co/QMcfp4z/database-schema.png "Database Schema")
 Adicione aqui screenshots do seu projeto para ilustrar seu funcionamento.
 
 ### Créditos
