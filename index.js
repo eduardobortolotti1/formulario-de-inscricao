@@ -65,7 +65,7 @@ app.get("/form", (req, res) => {
 });
 
 app.post("/api/submit", (req, res) => {
-  // Mounting multer manually to and using a callback function to handle file uploading errors.
+  // Mounting multer manually to upload files and using a callback function to handle file uploading errors.
   upload.single("pdf")(req, res, function (err) {
     if (err instanceof multer.MulterError) {
       // A Multer error occurred when uploading.
