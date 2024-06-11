@@ -9,7 +9,7 @@
     "dev": "nodemon src/index.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Eduardo Bortolotti <145396580+eduardobortolotti1@users.noreply.github.com>",
   "license": "ISC",
   "description": "",
   "dependencies": {
@@ -24,5 +24,6 @@
     "nodemon": "^3.1.3",
     "path": "^0.12.7",
     "pg": "^8.12.0"
-  }
+  },
+  "repository": "https://github.com/eduardobortolotti1/formulario-de-inscricao.git"
 }
