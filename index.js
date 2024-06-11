@@ -18,7 +18,7 @@ app.use(express.static("public"));
 app.set("view engine", "ejs");
 
 app.use(session({
-  secret: "uepa_2024", // Replace "your_secret_key" with a strong, unique string
+  secret: "uepa_2024", // Replace "your_secret_key" with a strong, unique string.
   resave: false,
   saveUninitialized: true
 }));
@@ -46,7 +46,7 @@ const upload = multer({
 // PosgreSQL connection. CHANGE CREDENTIALS AS NEEDED!
 const db = new pg.Client({
   user: "postgres",
-  password: "",
+  password: "jogador9",
   host: "localhost",
   database: "form",
   port: 5432,
