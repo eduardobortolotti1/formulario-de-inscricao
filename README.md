@@ -2,7 +2,7 @@
 
 ## Sobre o Projeto
 
-Este é um projeto de um site de formulário que utiliza Node.js no backend para lidar com requisições, PostgreSQL como banco de dados para armazenamento dos dados dos formulários, Multer para upload de arquivos, Express como framework web, e EJS como engine de templates para renderização das páginas HTML.
+Este é um projeto de um site de formulário que utiliza Node.js no backend para lidar com requisições, PostgreSQL como banco de dados para armazenamento dos dados dos formulários, Multer para upload de arquivos, Express como framework web, e EJS como engine de templates para renderização das páginas HTML. É utilizado também Bootstrap como framework de CSS.
 
 O site permite que usuários preencham um formulário com seus dados pessoais e enviem para armazenamento no banco de dados. O projeto também inclui validação e sanitização de dados para garantir a segurança e integridade dos dados armazenados.
 
@@ -61,7 +61,8 @@ Database Schema
 ![Database Schema](https://i.ibb.co/QMcfp4z/database-schema.png "Database Schema")
 ![Database Schema](https://i.ibb.co/k8bLByn/firefox-Pp-QQ7-EJn-ND.png)
 ![Database Schema](https://i.ibb.co/yXPcgPC/firefox-7rh-Xz-YXTv-F.jpg)
-![Database Schema](https://i.ibb.co/KytJczh/firefox-m6fhl-Amyf-Q.png)
+![Database Schema](https://i.ibb.co/KytJczh/firefox-m6fhl-Amyf-Q.png)
+
 
 ### Créditos
 
