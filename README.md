@@ -14,6 +14,7 @@ Para executar este projeto localmente, siga os passos abaixo:
 
 ### Pré-requisitos
 
+- Yarn instalado
 - Node.js instalado
 - PostgreSQL instalado e configurado
 
@@ -30,7 +31,7 @@ Para executar este projeto localmente, siga os passos abaixo:
     ```
 3. **Instale as dependências:**
     ```bash
-    npm install
+    yarn install
     ```
 4. **Importe o banco de dados no PostgreSQL:**
     Entre no usuário postgres
@@ -51,7 +52,7 @@ Para executar este projeto localmente, siga os passos abaixo:
 
 5. **Execute o servidor:**
     ```bash
-    node index.js
+    yarn start
     ```
 6. **Acesse o site:**
     Abra o navegador e vá para http://localhost:3000/
