@@ -46,7 +46,7 @@ const upload = multer({
 // PosgreSQL connection. CHANGE CREDENTIALS AS NEEDED!
 const db = new pg.Client({
   user: "postgres",
-  password: "jogador9",
+  password: "",
   host: "localhost",
   database: "form",
   port: 5432,
