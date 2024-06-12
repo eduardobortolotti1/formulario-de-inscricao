@@ -5,7 +5,7 @@
 -- Dumped from database version 16.3
 -- Dumped by pg_dump version 16.3
 
--- Started on 2024-06-09 20:33:01
+-- Started on 2024-06-12 00:54:23
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -52,7 +52,7 @@ CREATE SEQUENCE public.cargos_id_seq
 ALTER SEQUENCE public.cargos_id_seq OWNER TO postgres;
 
 --
--- TOC entry 4878 (class 0 OID 0)
+-- TOC entry 4874 (class 0 OID 0)
 -- Dependencies: 219
 -- Name: cargos_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -90,7 +90,7 @@ CREATE SEQUENCE public.cidades_id_seq
 ALTER SEQUENCE public.cidades_id_seq OWNER TO postgres;
 
 --
--- TOC entry 4879 (class 0 OID 0)
+-- TOC entry 4875 (class 0 OID 0)
 -- Dependencies: 215
 -- Name: cidades_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -99,13 +99,14 @@ ALTER SEQUENCE public.cidades_id_seq OWNED BY public.cidades.id;
 
 
 --
--- TOC entry 222 (class 1259 OID 16592)
+-- TOC entry 222 (class 1259 OID 16700)
 -- Name: inscricoes; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.inscricoes (
     id integer NOT NULL,
     nome character varying(255) NOT NULL,
+    sexo character varying(20),
     email character varying(255) NOT NULL,
     data_nascimento date NOT NULL,
     cpf character varying(20) NOT NULL,
@@ -121,7 +122,7 @@ CREATE TABLE public.inscricoes (
 ALTER TABLE public.inscricoes OWNER TO postgres;
 
 --
--- TOC entry 221 (class 1259 OID 16591)
+-- TOC entry 221 (class 1259 OID 16699)
 -- Name: inscricoes_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -137,7 +138,7 @@ CREATE SEQUENCE public.inscricoes_id_seq
 ALTER SEQUENCE public.inscricoes_id_seq OWNER TO postgres;
 
 --
--- TOC entry 4880 (class 0 OID 0)
+-- TOC entry 4876 (class 0 OID 0)
 -- Dependencies: 221
 -- Name: inscricoes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -177,7 +178,7 @@ CREATE SEQUENCE public.vagas_id_seq
 ALTER SEQUENCE public.vagas_id_seq OWNER TO postgres;
 
 --
--- TOC entry 4881 (class 0 OID 0)
+-- TOC entry 4877 (class 0 OID 0)
 -- Dependencies: 217
 -- Name: vagas_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -202,7 +203,7 @@ ALTER TABLE ONLY public.cidades ALTER COLUMN id SET DEFAULT nextval('public.cida
 
 
 --
--- TOC entry 4706 (class 2604 OID 16595)
+-- TOC entry 4706 (class 2604 OID 16703)
 -- Name: inscricoes id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -218,7 +219,7 @@ ALTER TABLE ONLY public.vagas ALTER COLUMN id SET DEFAULT nextval('public.vagas_
 
 
 --
--- TOC entry 4870 (class 0 OID 16552)
+-- TOC entry 4866 (class 0 OID 16552)
 -- Dependencies: 220
 -- Data for Name: cargos; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -250,7 +251,7 @@ COPY public.cargos (id, nome_cargo) FROM stdin;
 
 
 --
--- TOC entry 4866 (class 0 OID 16531)
+-- TOC entry 4862 (class 0 OID 16531)
 -- Dependencies: 216
 -- Data for Name: cidades; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -276,17 +277,17 @@ COPY public.cidades (id, nome_cidade) FROM stdin;
 
 
 --
--- TOC entry 4872 (class 0 OID 16592)
+-- TOC entry 4868 (class 0 OID 16700)
 -- Dependencies: 222
 -- Data for Name: inscricoes; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.inscricoes (id, nome, email, data_nascimento, cpf, rg, celular, telefone, cidade, cargo, pdf_path) FROM stdin;
+COPY public.inscricoes (id, nome, sexo, email, data_nascimento, cpf, rg, celular, telefone, cidade, cargo, pdf_path) FROM stdin;
 \.
 
 
 --
--- TOC entry 4868 (class 0 OID 16540)
+-- TOC entry 4864 (class 0 OID 16540)
 -- Dependencies: 218
 -- Data for Name: vagas; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -349,7 +350,7 @@ COPY public.vagas (id, cargo_id, cidade_id, quantidade_vagas) FROM stdin;
 
 
 --
--- TOC entry 4882 (class 0 OID 0)
+-- TOC entry 4878 (class 0 OID 0)
 -- Dependencies: 219
 -- Name: cargos_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -358,7 +359,7 @@ SELECT pg_catalog.setval('public.cargos_id_seq', 22, true);
 
 
 --
--- TOC entry 4883 (class 0 OID 0)
+-- TOC entry 4879 (class 0 OID 0)
 -- Dependencies: 215
 -- Name: cidades_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -367,16 +368,16 @@ SELECT pg_catalog.setval('public.cidades_id_seq', 32, true);
 
 
 --
--- TOC entry 4884 (class 0 OID 0)
+-- TOC entry 4880 (class 0 OID 0)
 -- Dependencies: 221
 -- Name: inscricoes_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.inscricoes_id_seq', 19, true);
+SELECT pg_catalog.setval('public.inscricoes_id_seq', 1, false);
 
 
 --
--- TOC entry 4885 (class 0 OID 0)
+-- TOC entry 4881 (class 0 OID 0)
 -- Dependencies: 217
 -- Name: vagas_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -412,25 +413,7 @@ ALTER TABLE ONLY public.cidades
 
 
 --
--- TOC entry 4714 (class 2606 OID 16601)
--- Name: inscricoes inscricoes_cpf_key; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.inscricoes
-    ADD CONSTRAINT inscricoes_cpf_key UNIQUE (cpf);
-
-
---
--- TOC entry 4716 (class 2606 OID 16603)
--- Name: inscricoes inscricoes_pdf_path_key; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.inscricoes
-    ADD CONSTRAINT inscricoes_pdf_path_key UNIQUE (pdf_path);
-
-
---
--- TOC entry 4718 (class 2606 OID 16599)
+-- TOC entry 4714 (class 2606 OID 16707)
 -- Name: inscricoes inscricoes_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -439,25 +422,25 @@ ALTER TABLE ONLY public.inscricoes
 
 
 --
--- TOC entry 4720 (class 2606 OID 16609)
--- Name: inscricoes inscricoes_cargo_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 4716 (class 2606 OID 16713)
+-- Name: inscricoes fk_cargo; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.inscricoes
-    ADD CONSTRAINT inscricoes_cargo_fkey FOREIGN KEY (cargo) REFERENCES public.cargos(id);
+    ADD CONSTRAINT fk_cargo FOREIGN KEY (cargo) REFERENCES public.cargos(id);
 
 
 --
--- TOC entry 4721 (class 2606 OID 16604)
--- Name: inscricoes inscricoes_cidade_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 4717 (class 2606 OID 16708)
+-- Name: inscricoes fk_cidade; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.inscricoes
-    ADD CONSTRAINT inscricoes_cidade_fkey FOREIGN KEY (cidade) REFERENCES public.cidades(id);
+    ADD CONSTRAINT fk_cidade FOREIGN KEY (cidade) REFERENCES public.cidades(id);
 
 
 --
--- TOC entry 4719 (class 2606 OID 16546)
+-- TOC entry 4715 (class 2606 OID 16546)
 -- Name: vagas vagas_cidade_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -465,7 +448,7 @@ ALTER TABLE ONLY public.vagas
     ADD CONSTRAINT vagas_cidade_id_fkey FOREIGN KEY (cidade_id) REFERENCES public.cidades(id);
 
 
--- Completed on 2024-06-09 20:33:01
+-- Completed on 2024-06-12 00:54:23
 
 --
 -- PostgreSQL database dump complete

@@ -59,7 +59,7 @@ Para executar este projeto localmente, siga os passos abaixo:
 
 ### Screenshots
 Database Schema
-![Database Schema](https://i.ibb.co/QMcfp4z/database-schema.png "Database Schema")
+![Database Schema](https://i.ibb.co/TtxQQmh/image.png "Database Schema")
 ![Database Schema](https://i.ibb.co/k8bLByn/firefox-Pp-QQ7-EJn-ND.png)
 ![Database Schema](https://i.ibb.co/yXPcgPC/firefox-7rh-Xz-YXTv-F.jpg)
 ![Database Schema](https://i.ibb.co/KytJczh/firefox-m6fhl-Amyf-Q.png)

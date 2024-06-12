@@ -46,7 +46,7 @@ const upload = multer({
 // PosgreSQL connection. CHANGE CREDENTIALS AS NEEDED!
 const db = new pg.Client({
   user: "postgres",
-  password: "",
+  password: "jogador9",
   host: "localhost",
   database: "form",
   port: 5432,
@@ -85,6 +85,7 @@ app.post("/api/submit", (req, res) => {
   async function handleFormData(req, res) {
     let {
       nome,
+      sexo,
       email,
       data_nascimento,
       cpf,
@@ -98,7 +99,7 @@ app.post("/api/submit", (req, res) => {
 
     // DATA VALIDATION, before and after sanitization.
     // Check if all required fields are present
-    if (!nome || !email || !data_nascimento || !cpf || !rg || !celular || !cidade || !cargo || !file) {
+    if (!nome || !sexo || !email || !data_nascimento || !cpf || !rg || !celular || !cidade || !cargo || !file) {
       return res.status(400).render("form");
     }
 
@@ -111,7 +112,7 @@ app.post("/api/submit", (req, res) => {
     cargo = remove_not_num(cargo);
 
     // Check if all required fields are present
-    if (!nome || !email || !data_nascimento || !cpf || !rg || !celular || !cidade || !cargo || !file) {
+    if (!nome || !sexo || !email || !data_nascimento || !cpf || !rg || !celular || !cidade || !cargo || !file) {
       req.flash("error", "ERRO: Algo deu errado no seu registro!")
       return res.status(400).render("form");
     }
@@ -131,11 +132,11 @@ app.post("/api/submit", (req, res) => {
     try {
       // Parametized query to prevent SQl injection attacks
       const insertQuery = `
-      INSERT INTO inscricoes (nome, email, data_nascimento, cpf, rg, celular, telefone, cidade, cargo, pdf_path)
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+      INSERT INTO inscricoes (nome, sexo, email, data_nascimento, cpf, rg, celular, telefone, cidade, cargo, pdf_path)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
       RETURNING id`;
 
-      const values = [nome, email, data_nascimento, cpf, rg, celular, telefone, cidade, cargo, pdf_path];
+      const values = [nome, sexo, email, data_nascimento, cpf, rg, celular, telefone, cidade, cargo, pdf_path];
       await db.query("BEGIN");
       const { rows } = await db.query(insertQuery, values);
       const insertedId = rows[0].id;

@@ -69,3 +69,4 @@ document.addEventListener("DOMContentLoaded", atualizarCidades);
 (document.getElementById("file")).value = "";
 (document.getElementById("cidade_select")).value = "";
 (document.getElementById("vaga_select")).value = "";
+(document.getElementById("sexo")).value = "";
