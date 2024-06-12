@@ -96,7 +96,7 @@ app.post("/api/submit", (req, res) => {
     } = req.body;
     const file = req.file;
 
-    // DATA VALIDATION, before and after sanitization
+    // DATA VALIDATION, before and after sanitization.
     // Check if all required fields are present
     if (!nome || !email || !data_nascimento || !cpf || !rg || !celular || !cidade || !cargo || !file) {
       return res.status(400).render("form");
