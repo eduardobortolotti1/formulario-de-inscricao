@@ -60,9 +60,8 @@ Para executar este projeto localmente, siga os passos abaixo:
 ### Screenshots
 Database Schema
 ![Database Schema](https://i.ibb.co/TtxQQmh/image.png "Database Schema")
-![Database Schema](https://i.ibb.co/k8bLByn/firefox-Pp-QQ7-EJn-ND.png)
-![Database Schema](https://i.ibb.co/yXPcgPC/firefox-7rh-Xz-YXTv-F.jpg)
-![Database Schema](https://i.ibb.co/KytJczh/firefox-m6fhl-Amyf-Q.png)
+![Database Schema](https://i.ibb.co/D9ZvXq4/Fire-Shot-Capture-002-Formul-rio-UEPA-localhost.png)
+![Database Schema](https://i.ibb.co/PcmJW6w/Fire-Shot-Capture-001-Formul-rio-UEPA-localhost.png)
 
 
 ### Créditos
