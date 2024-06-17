@@ -65,13 +65,13 @@ Muito semelhante ao processo manual, entretanto a database é importada pelo pgA
 2. Clicando com o botão direito na database recém criada, aperte em "Restore"
 3. Procure e selecione o arquivo "form_database.sql" que está dentro da pasta do projeto, e clique em "Restore"
 
-### Screenshots  
+## Screenshots  
 Database Schema
 ![Database Schema](https://i.ibb.co/TtxQQmh/image.png "Database Schema")
 ![Database Schema](https://i.ibb.co/D9ZvXq4/Fire-Shot-Capture-002-Formul-rio-UEPA-localhost.png)
 ![Database Schema](https://i.ibb.co/PcmJW6w/Fire-Shot-Capture-001-Formul-rio-UEPA-localhost.png)
 
 
-### Créditos
+## Créditos
 
 Este projeto foi desenvolvido como parte do curso de Engenharia de Software da Universidade do Estado do Pará (UEPA), como parte do trabalho final da disciplina de Desenvolvimento Web.
