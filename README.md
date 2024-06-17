@@ -46,9 +46,9 @@ Para executar este projeto localmente, siga os passos abaixo:
     ```sql
     CREATE DATABASE form;
     ```
-    Saia da CLI do psql (CTRL-C) e importe a database existente (form_database.sql) para a recém criada
+    Saia da CLI do psql (CTRL-C) e importe a database do projeto (form_database.sql) para a recém criada  
     ```bash
-    psql -U postgres -d form -f "C:/diretorio/ate/arquivo/form_database.sql" #O arquivo está dentro da pasta do projeto
+    psql -U postgres -d form -f "C:\diretorio\ate\arquivo\form_database.sql"  
     ```
     **Não se esqueça de alterar o usuário, senha, porta e host da conexão feita em index.js !**
 
