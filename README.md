@@ -68,8 +68,10 @@ Muito semelhante ao processo manual, entretanto a database é importada pelo pgA
 ## Screenshots  
 Database Schema
 ![Database Schema](https://i.ibb.co/TtxQQmh/image.png "Database Schema")
-![Database Schema](https://i.ibb.co/D9ZvXq4/Fire-Shot-Capture-002-Formul-rio-UEPA-localhost.png)
-![Database Schema](https://i.ibb.co/PcmJW6w/Fire-Shot-Capture-001-Formul-rio-UEPA-localhost.png)
+Website
+![Website screenshot](https://i.ibb.co/D9ZvXq4/Fire-Shot-Capture-002-Formul-rio-UEPA-localhost.png)
+![Website screenshot](https://i.ibb.co/PcmJW6w/Fire-Shot-Capture-001-Formul-rio-UEPA-localhost.png)
+![Website GIF](https://i.ibb.co/VSX7m25/firefox-J6y-WEyc-K6q.gif)
 
 
 ## Créditos
