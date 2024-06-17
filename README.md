@@ -20,7 +20,7 @@ Para executar este projeto localmente, siga os passos abaixo:
 - Node.js instalado
 - PostgreSQL instalado e configurado
 
-### Passos
+### Passos (Manual)
 
 1. **Clone o repositório:**
 
@@ -59,7 +59,13 @@ Para executar este projeto localmente, siga os passos abaixo:
 6. **Acesse o site:**
     Abra o navegador e vá para http://localhost:3000/
 
-### Screenshots
+### Passos (pgAdmin)  
+Muito semelhante ao processo manual, entretanto a database é importada pelo pgAdmin.
+1. Crie uma nova database no pgAdmin  
+2. Clicando com o botão direito na database recém criada, aperte em "Restore"
+3. Procure e selecione o arquivo "form_database.sql" que está dentro da pasta do projeto, e clique em "Restore"
+
+### Screenshots  
 Database Schema
 ![Database Schema](https://i.ibb.co/TtxQQmh/image.png "Database Schema")
 ![Database Schema](https://i.ibb.co/D9ZvXq4/Fire-Shot-Capture-002-Formul-rio-UEPA-localhost.png)
